@@ -2,6 +2,8 @@
 
 This is to provide a sample codes for the end-to-end app development story covering Blazor Web Assembly, Fluent UI, Azure Functions, Azure Static Web Apps and GitHub Actions
 
+> <span style="color: red; font-weight: bold; font-size: 18pt;">For Build demo, use the `demo` branch, instead of `master`</span>
+
 
 ## Prerequisites ##
 
