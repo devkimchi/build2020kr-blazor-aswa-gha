@@ -35,7 +35,7 @@ cd build2020kr-blazor-aswa-gha
 2. Run the app.
 
    ```bash
-   dotnet run -p src/Blazor.WebAssemblyApp
+   dotnet run -p src/Demo.BlazorApp
    ```
 
 3. Open a web browser and enter the URL.

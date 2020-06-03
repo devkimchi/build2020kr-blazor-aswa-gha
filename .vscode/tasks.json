@@ -1,42 +1,101 @@
 {
     "version": "2.0.0",
     "tasks": [
+		{
+			"label": "clean",
+			"type": "process",
+			"command": "dotnet",
+			"args": [
+				"clean",
+				"/property:GenerateFullPaths=true",
+				"/consoleloggerparameters:NoSummary"
+			],
+			"problemMatcher": "$msCompile"
+		},
+		{
+			"label": "build",
+			"type": "process",
+			"dependsOn": "clean",
+			"command": "dotnet",
+			"args": [
+				"build",
+				"/property:GenerateFullPaths=true",
+				"/consoleloggerparameters:NoSummary"
+			],
+			"group": {
+				"kind": "build",
+				"isDefault": true
+			},
+			"problemMatcher": "$msCompile"
+		},
+		{
+			"label": "clean release",
+			"type": "process",
+			"command": "dotnet",
+			"args": [
+				"clean",
+				"--configuration",
+				"Release",
+				"/property:GenerateFullPaths=true",
+				"/consoleloggerparameters:NoSummary"
+			],
+			"problemMatcher": "$msCompile"
+		},
         {
-            "label": "build",
-            "command": "dotnet",
+            "label": "publish blazor",
             "type": "process",
-            "args": [
-                "build",
-                "${workspaceFolder}/src/Blazor.WebAssemblyApp/Blazor.WebAssemblyApp.csproj",
-                "/property:GenerateFullPaths=true",
-                "/consoleloggerparameters:NoSummary"
-            ],
-            "problemMatcher": "$msCompile"
-        },
-        {
-            "label": "publish",
+			"dependsOn": "clean release",
             "command": "dotnet",
-            "type": "process",
             "args": [
                 "publish",
-                "${workspaceFolder}/src/Blazor.WebAssemblyApp/Blazor.WebAssemblyApp.csproj",
+                "--project",
+                "${workspaceFolder}/src/Demo.BlazorApp/Demo.BlazorApp.csproj",
+				"--configuration",
+				"Release",
                 "/property:GenerateFullPaths=true",
                 "/consoleloggerparameters:NoSummary"
             ],
             "problemMatcher": "$msCompile"
         },
+		{
+			"label": "publish func",
+			"type": "process",
+			"dependsOn": "clean release",
+			"command": "dotnet",
+			"args": [
+				"publish",
+                "--project",
+                "${workspaceFolder}/src/Demo.FunctionApp/Demo.FunctionApp.csproj",
+				"--configuration",
+				"Release",
+				"/property:GenerateFullPaths=true",
+				"/consoleloggerparameters:NoSummary"
+			],
+			"problemMatcher": "$msCompile"
+		},
         {
             "label": "watch",
-            "command": "dotnet",
             "type": "process",
+            "command": "dotnet",
             "args": [
                 "watch",
                 "run",
-                "${workspaceFolder}/src/Blazor.WebAssemblyApp/Blazor.WebAssemblyApp.csproj",
+                "${workspaceFolder}/src/Demo.BlazorApp/Demo.BlazorApp.csproj",
                 "/property:GenerateFullPaths=true",
                 "/consoleloggerparameters:NoSummary"
             ],
             "problemMatcher": "$msCompile"
-        }
+        },
+		{
+            "label": "func debug",
+			"type": "func",
+			"dependsOn": "build",
+			"command": "host start",
+			"options": {
+				"cwd": "${workspaceFolder}/src/Demo.FunctionApp/bin/Debug/netcoreapp3.1"
+			},
+			"isBackground": true,
+			"problemMatcher": "$func-watch"
+		}
     ]
 }
