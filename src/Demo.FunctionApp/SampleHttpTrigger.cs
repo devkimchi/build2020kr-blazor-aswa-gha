@@ -1,14 +1,12 @@
-using System;
-using System.IO;
 using System.Threading.Tasks;
+
+using Humanizer;
 
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Azure.WebJobs;
 using Microsoft.Azure.WebJobs.Extensions.Http;
 using Microsoft.Extensions.Logging;
-
-using Newtonsoft.Json;
 
 namespace Demo.FunctionApp
 {
@@ -21,7 +19,10 @@ namespace Demo.FunctionApp
         {
             log.LogInformation("C# HTTP trigger function processed a request.");
 
-            var message = new { message = "world!" };
+            var count = req.Query["count"].ToString();
+            var ordinalised = count.Ordinalize();
+
+            var message = new { message = $"{ordinalised} world!" };
             var result = new OkObjectResult(message);
 
             return await Task.FromResult(result).ConfigureAwait(false);
