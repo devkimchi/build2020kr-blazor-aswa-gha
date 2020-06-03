@@ -20,7 +20,15 @@ namespace Demo.FunctionApp
             log.LogInformation("C# HTTP trigger function processed a request.");
 
             var count = req.Query["count"].ToString();
-            var ordinalised = count.Ordinalize();
+            var ordinalised = default(string);
+            try
+            {
+                ordinalised = string.IsNullOrWhiteSpace(count) ? "0".Ordinalize() : count.Ordinalize();
+            }
+            catch
+            {
+                ordinalised = "undefined";
+            }
 
             var message = new { message = $"{ordinalised} world!" };
             var result = new OkObjectResult(message);
