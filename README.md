@@ -4,7 +4,6 @@ This is to provide a sample codes for the end-to-end app development story cover
 
 > <span style="color: red; font-weight: bold; font-size: 18pt;">For Build demo, use the `demo` branch, instead of `master`</span>
 
-
 ## Prerequisites ##
 
 * [.NET Core SDK 3.1.4 or later](https://dotnet.microsoft.com/download/dotnet-core/3.1?WT.mc_id=build2020kr-github-juyoo#3.1.4)
