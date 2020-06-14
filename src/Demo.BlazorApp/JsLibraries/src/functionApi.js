@@ -3,7 +3,7 @@ import * as React from 'react';
 import ReactDOM from 'react-dom';
 
 export async function getHello(requestUri) {
-    let response = await axios.get(requestUri, { headers: { 'Access-Control-Allow-Origin': '*' } });
+    let response = await axios.get(requestUri);
     let message = response.data.message;
 
     const Hello = () => React.createElement(

@@ -351,4 +351,7 @@ MigrationBackup/
 
 .DS_Store
 **/published/
+**/api/
+**/funcapp/
 **/wwwroot/js/
+funcapp.zip

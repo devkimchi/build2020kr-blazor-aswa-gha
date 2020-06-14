@@ -20,12 +20,26 @@
     {
         currentCount++;
 
-        var baseUri = Config.GetValue<string>("FUNCTIONAPP_BASE_URI");
-        var endpoint = Config.GetValue<string>("FUNCTIONAPP_ENDPOINT");
-        var authKey = Config.GetValue<string>("FUNCTIONAPP_AUTH_KEY");
-        var requestUri = $"{baseUri.TrimEnd('/')}/{endpoint.TrimStart('/')}?count={currentCount}&code={authKey}";
+
+
+
+
+
+
 
         await Jsr.InvokeVoidAsync("FluentUIComponents.RenderUICounter", currentCount);
+
+
+
+
+
+
+
+
+        var baseUri = Config.GetValue<string>("FUNCTIONAPP_BASE_URI");
+        var endpoint = Config.GetValue<string>("FUNCTIONAPP_ENDPOINT");
+        var requestUri = $"{baseUri.TrimEnd('/')}/{endpoint.TrimStart('/')}?count={currentCount}";
+
         await Jsr.InvokeVoidAsync("FluentUIComponents.GetHello", requestUri);
     }
 }
