@@ -1,4 +1,5 @@
 ﻿@page "/counter"
+@* @inject IJSRuntime Jsr *@
 
 <h1>Counter</h1>
 
@@ -6,11 +7,15 @@
 
 <button class="btn btn-primary" @onclick="IncrementCount">Click me</button>
 
+<div id="reactUICounter"></div>
+
 @code {
     private int currentCount = 0;
 
     private void IncrementCount()
     {
         currentCount++;
+
+        @* await Jsr.InvokeVoidAsync("FluentUIComponents.RenderUICounter", currentCount); *@
     }
 }
